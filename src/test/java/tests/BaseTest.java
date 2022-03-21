@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.BasePage;
-import pages.CartPage;
+import pages.CheckOutPages;
 import pages.LoginPage;
 import pages.ProductsPage;
 
@@ -16,8 +16,7 @@ public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
-    CartPage cartPage;
-    BasePage basePage;
+    CheckOutPages checkOutPages;
 
     @BeforeMethod
     public void setup() {
@@ -26,12 +25,12 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        loginPage = new LoginPage(driver);
-        productsPage=new ProductsPage(driver);
-        cartPage = new CartPage(driver);
-        basePage = new BasePage(driver);
 
+        loginPage=new LoginPage(driver);
+        productsPage=new ProductsPage(driver);
+        checkOutPages=new CheckOutPages(driver);
     }
+
 
     @AfterMethod(alwaysRun = true)
     public void close() {
