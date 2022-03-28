@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Suite" parallel="tests" thread-count="8">
+    <groups>
+        <run>
+            <exclude name="slow">
+
+            </exclude>
+        </run>
+    </groups>
+    <test name="Chrome">
+        <parameter name="Browser" value="Chrome"/>
+        <classes>
+
+            <class name="tests.CartTest"/>
+            <class name="tests.LoginTest"/>
+            <class name="tests.SortingTest"/>
+            <class name="tests.InfoUserTest"/>
+        </classes>
+    </test>
+
+    <test name="Opera">
+        <parameter name="Browser" value="Opera"/>
+        <classes>
+
+            <class name="tests.CartTest"/>
+            <class name="tests.LoginTest"/>
+            <class name="tests.SortingTest"/>
+            <class name="tests.InfoUserTest"/>
+        </classes>
+    </test>
+
+    <test name="EDGE">
+        <parameter name="Browser" value="EDGE"/>
+        <classes>
+            <class name="tests.CartTest"/>
+            <class name="tests.LoginTest"/>
+            <class name="tests.SortingTest"/>
+            <class name="tests.InfoUserTest"/>
+        </classes>
+    </test>
+</suite>
