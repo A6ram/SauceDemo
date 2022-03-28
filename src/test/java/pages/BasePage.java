@@ -6,9 +6,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BasePage {
     WebDriver driver;
     WebDriverWait wait;
-    String baseUrl ="https://www.saucedemo.com/";
-    public BasePage(WebDriver driver){
-        this.driver =driver;
-        wait= new WebDriverWait(driver,10);
+    String baseUrl = "https://www.saucedemo.com/";
+
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        wait = new WebDriverWait(driver, 10);
     }
 }
