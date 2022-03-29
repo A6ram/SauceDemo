@@ -12,7 +12,8 @@ public class CheckOutPages extends BasePage {
     public static final By FIRSTNAME = By.id("first-name");
     public static final By ZIPCODE = By.id("postal-code");
     public static final By ERROR_MESSAGE2 = By.xpath("//*[@id=\"checkout_info_container\"]/div/form/div[1]/div[4]");
-
+    public static final By FINISH_CHECKOUT = By.id("finish");
+    public static final By SUCCESSFUL_ORDER = By.className("complete-header");
 
     public CheckOutPages(WebDriver driver) {
         super(driver);
@@ -47,5 +48,11 @@ public class CheckOutPages extends BasePage {
         System.out.println(linktext2);
         assertEquals(linktext2, "THANK YOU FOR YOUR ORDER");
         driver.findElement(By.id("back-to-products")).click();
+    }
+    public void finishOrder() {
+        driver.findElement(FINISH_CHECKOUT).click();
+    }
+    public String checkOrderStatus() {
+        return driver.findElement(SUCCESSFUL_ORDER).getText();
     }
 }

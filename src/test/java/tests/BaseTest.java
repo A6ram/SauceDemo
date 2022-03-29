@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.testng.annotations.*;
+import pages.CartPage;
 import pages.CheckOutPages;
 import pages.LoginPage;
 import pages.ProductsPage;
@@ -20,6 +21,7 @@ public class BaseTest {
     LoginPage loginPage;
     ProductsPage productsPage;
     CheckOutPages checkOutPages;
+    CartPage cartPage;
 
 
     @Parameters({"Browser"})

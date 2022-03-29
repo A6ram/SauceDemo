@@ -71,4 +71,7 @@ public class ProductsPage extends BasePage {
         String highToLow = driver.findElement(By.className("active_option")).getText();
         assertEquals(highToLow, "PRICE (HIGH TO LOW)");
     }
+    public void removeFromCart() {
+        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
+    }
 }
