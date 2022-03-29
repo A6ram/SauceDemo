@@ -27,7 +27,7 @@
     </test>
     <test name="UserInfo">
         <classes>
-            <class name="tests.UserInfoTest"/>
+            <class name="tests.InfoUserTest"/>
         </classes>
     </test>
 
