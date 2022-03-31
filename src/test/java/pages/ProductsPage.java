@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,25 +24,43 @@ public class ProductsPage extends BasePage {
         driver.get(baseUrl + "inventory.html");
     }
 
+    @Step("Добавление товара в корзину")
     public void addToCart(String product) {
         driver.findElement(By.xpath(String.format(productLocator, product))).click();
     }
 
+    @Step("Удаление товара из корзины")
     public void deleteToCart(String product) {
         driver.findElement(By.xpath(String.format(productLocatorDelete, product))).click();
         String valueSauce = driver.findElement(By.className("shopping_cart_badge")).getText();
-        assertEquals(valueSauce, "x");
+        assertEquals(valueSauce, "2");
     }
 
     public String getTitle() {
         return driver.findElement(PAGE_TITLE).getText();
     }
 
-    public void waitForLoading() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PAGE_TITLE));
+    @Step("Неверно введенное количество товара")
+    public void wrongExpectation() {
+        addToCart("Sauce Labs Bolt T-Shirt");
+        String valueSauce = driver.findElement(By.className("shopping_cart_badge")).getText();
+        assertEquals(valueSauce, "2");
+
+    }
+    @Step("Неверный локатор")
+    public void specialWrongTestForAllureGrafics() {
+        addToCart("Sauce Labs Backpack");
+        addToCart("Sauce Labs Bike Light");
+        addToCart("Sauce Labs Bolt T-Shirt");
+        deleteToCart("Sauce Labs Bolt T-Shirt");
+        driver.findElement(By.id("shopping_cart_container")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Your Cart']")));
+        String name = driver.findElement(By.id("checkout")).getText();
+        assertEquals(name, "CHECKOUT");
+        driver.findElement(By.id("checkoutblabla")).click();
     }
 
-
+    @Step("Добавление и удаление товара из корзины")
     public void chooseThreeItemAndChangeOnTwo() {
         addToCart("Sauce Labs Backpack");
         addToCart("Sauce Labs Bike Light");
@@ -54,11 +73,13 @@ public class ProductsPage extends BasePage {
         driver.findElement(By.id("checkout")).click();
     }
 
-    public void goToTheCart() {
-        driver.findElement(By.id("shopping_cart_container")).click();
+
+    @Step("Использование неверного локатора")
+    public void goTotheCart() {
+        driver.findElement(By.id("shopping_cart_containerBLABLA")).click();
     }
 
-
+    @Step("Проверка сортировки товара ")
     public void sort() {
         WebElement sortingElement = driver.findElement(sort);
         Select select = new Select(driver.findElement(By.cssSelector(".product_sort_container")));
@@ -70,8 +91,5 @@ public class ProductsPage extends BasePage {
         driver.findElement(By.xpath("//*[@id='header_container']/div[2]/div[2]/span/select/option[4]")).click();
         String highToLow = driver.findElement(By.className("active_option")).getText();
         assertEquals(highToLow, "PRICE (HIGH TO LOW)");
-    }
-    public void removeFromCart() {
-        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
     }
 }

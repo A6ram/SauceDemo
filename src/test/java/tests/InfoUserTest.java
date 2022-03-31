@@ -11,13 +11,13 @@ public class InfoUserTest extends BaseTest {
     @DataProvider(name = "Заполнение полей данных пользователя в корзине")
     public Object[][] formData() {
         return new Object[][]{
-                {"", "blabla", "12345", "Error: First Name is required"},
-                {"blabla", "", "12345", "Error: Last Name is required"},
-                {"blabla", "blabla", "", "Error: Postal Code is required"}
+                {"", "Jones", "220089", "Error: First Name is required"},
+                {"Jack", "", "220089", "Error: Last Name is required"},
+                {"Jack", "Jones", "", "Error: Postal Code is required"}
         };
     }
 
-    @Test(dataProvider = "Заполнение полей данных пользователя в корзине")
+    @Test(dataProvider = "Негативные тесты на заполнение данных ")
 
     public void allFieldShouldBeRequired(String firstName, String lastName, String postCode, String error) {
         loginPage.open();
@@ -27,35 +27,33 @@ public class InfoUserTest extends BaseTest {
         assertEquals(checkOutPages.getError2(), error);
     }
 
-    @Test
+    @Test(description = "Без заполнения lastname")
+    public void lastNameShouldBeRequired() {
+        loginPage.open();
+        loginPage.login("standard_user", "secret_sauce");
+        checkOutPages.openUserInfo();
+        checkOutPages.infoUser("Jack", "", "220089");
+        assertEquals(checkOutPages.getError2(), "Error: Last Name is required");
+
+    }
+
+    @Test(description = "Без заполнения firstname")
+    public void firstNameShouldBeRequired() {
+        loginPage.open();
+        loginPage.login("standard_user", "secret_sauce");
+        checkOutPages.openUserInfo();
+        checkOutPages.infoUser("", "Jones", "22089");
+        assertEquals(checkOutPages.getError2(), "Error: First Name is required");
+    }
+
+    @Test(description = "Без заполнения zipCode")
     public void zipCodeShouldByRequired() {
 
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         checkOutPages.openUserInfo();
-        checkOutPages.infoUser("test", "test", "");
+        checkOutPages.infoUser("Jack", "Jones", "");
         assertEquals(checkOutPages.getError2(), "Error: Postal Code is required");
 
     }
-
-    @Test
-    public void lastNameShouldBeRequired() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        checkOutPages.openUserInfo();
-        checkOutPages.infoUser("test", "", "11111");
-        assertEquals(checkOutPages.getError2(), "Error: Last Name is required");
-
-    }
-
-    @Test
-    public void firstNameShouldBeRequired() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        checkOutPages.openUserInfo();
-        checkOutPages.infoUser("", "test", "11111");
-        assertEquals(checkOutPages.getError2(), "Error: First Name is required");
-    }
-
-
 }
