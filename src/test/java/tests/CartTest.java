@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class CartTest extends BaseTest {
-    @Test(description = "Проверка добавления/удаления товаров в/из корзины")
+    @Test(description = "Checking for adding / removing goods to / from the basket")
     public void productShouldBeAddedIntoCart() {
         loginPage.registration();
         productsPage.chooseThreeItemAndChangeOnTwo();
@@ -15,13 +15,5 @@ public class CartTest extends BaseTest {
         assertEquals(valueSauce, "2");
     }
 
-
-    @Step("Введен неверный локатор 'RedTest'")
-    @Test
-    public void mistakeRedTest() {
-        productsPage.specialWrongTestForAllureGrafics();
-
-
-    }
 
 }

@@ -20,21 +20,21 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    @Step("Открыть страницу логина")
+    @Step("Opening login page")
     public void open() {
         driver.get(baseUrl);
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
     }
 
 
-    @Step("Войти через {user} и {password}")
+    @Step("Log in by {user} and {password}")
     public void login(String user, String password) {
         driver.findElement(USER_INPUT).sendKeys(user);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).submit();
     }
 
-    @Step("Войти используя open() и login() ")
+    @Step("Registration and stark working ")
     public void registration() {
         open();
         login("performance_glitch_user", "secret_sauce");

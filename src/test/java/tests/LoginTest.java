@@ -8,7 +8,8 @@ import static org.testng.Assert.assertEquals;
 public class LoginTest extends BaseTest {
 
 
-    @DataProvider(name = "Входные данные для негативных тестов")
+
+    @DataProvider(name = "Input data for negative tests")
     public Object[][] loginData() {
         return new Object[][]{
                 {"test", "", "Epic sadface: Password is required"},
@@ -18,7 +19,7 @@ public class LoginTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "Входные данные для негативных тестов")
+    @Test(dataProvider = "Input data for negative tests")
     public void inputDataForNegative(String user, String password, String error) {
 
         loginPage.open();
@@ -26,21 +27,21 @@ public class LoginTest extends BaseTest {
         assertEquals(loginPage.getError(), error);
     }
 
-    @Test(description = "Проверка валидации user")
+    @Test(description = "Username Validity Check")
     public void userNameShouldBeRequired() {
         loginPage.open();
         loginPage.login("", "test");
         assertEquals(loginPage.getError(), "Epic sadface: Username is required");
     }
 
-    @Test(description = "Проверка заблокированного пользователя")
+    @Test(description = " User lock check")
     public void userNameShouldBeLockedOut() {
         loginPage.open();
         loginPage.login("locked_out_user", "secret_sauce");
         assertEquals(loginPage.getError(), "Epic sadface: Sorry, this user has been locked out.");
     }
 
-    @Test(description = "Проверка валидации password")
+    @Test(description = "Password validity check")
     public void userPasswordIsNotCorrect() {
         loginPage.open();
         loginPage.login("problem_user", "secret_sauce13");

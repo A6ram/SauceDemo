@@ -19,12 +19,13 @@ public class CheckOutPages extends BasePage {
         super(driver);
     }
 
-    public void openUserInfo() {
+    public void fillingUserDataForPayment() {
         driver.get(baseUrl + "checkout-step-one.html");
         wait.until(ExpectedConditions.visibilityOfElementLocated(USER_FIRSTNAME));
 
     }
 
+    @Step("Fill out the purchase form using {firstName},{lastName} and {zipCode}")
     public void infoUser(String firstName, String lastName, String zipCode) {
         driver.findElement(USER_FIRSTNAME).sendKeys(firstName);
         driver.findElement(USER_LASTNAME).sendKeys(lastName);
@@ -32,17 +33,13 @@ public class CheckOutPages extends BasePage {
         driver.findElement(By.cssSelector("[value=Continue")).click();
     }
 
-    @Step("Заполните форму покупки с помощью {firstName},{lastName} и {zipCode}")
-    public void userInfo() {
-        infoUser("Jack", "Jones", "220089");
-    }
 
-    @Step("Получение сообщения об ошибке при заполнении формы покупки ")
+    @Step("Receive an error message when filling out a purchase form ")
     public String getError2() {
         return driver.findElement(ERROR_MESSAGE2).getText();
     }
 
-    @Step("Проверка суммы для платежа")
+    @Step("Checksum verification for payment")
     public void checkTotalSum() {
         String checkTotalSum = driver.findElement(By.cssSelector(".summary_total_label")).getText();
         assertEquals(checkTotalSum, "Total: $43.18");

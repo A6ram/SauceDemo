@@ -24,43 +24,28 @@ public class ProductsPage extends BasePage {
         driver.get(baseUrl + "inventory.html");
     }
 
-    @Step("Добавление товара в корзину")
+    @Step(" Adds {product} item to cart")
     public void addToCart(String product) {
         driver.findElement(By.xpath(String.format(productLocator, product))).click();
     }
 
-    @Step("Удаление товара из корзины")
+    @Step(" Delete {product} item from cart")
     public void deleteToCart(String product) {
         driver.findElement(By.xpath(String.format(productLocatorDelete, product))).click();
         String valueSauce = driver.findElement(By.className("shopping_cart_badge")).getText();
         assertEquals(valueSauce, "2");
     }
 
-    public String getTitle() {
-        return driver.findElement(PAGE_TITLE).getText();
-    }
 
-    @Step("Неверно введенное количество товара")
+    @Step("intentionally entered an incorrect value to check the display of the report")
     public void wrongExpectation() {
         addToCart("Sauce Labs Bolt T-Shirt");
         String valueSauce = driver.findElement(By.className("shopping_cart_badge")).getText();
         assertEquals(valueSauce, "2");
 
     }
-    @Step("Неверный локатор")
-    public void specialWrongTestForAllureGrafics() {
-        addToCart("Sauce Labs Backpack");
-        addToCart("Sauce Labs Bike Light");
-        addToCart("Sauce Labs Bolt T-Shirt");
-        deleteToCart("Sauce Labs Bolt T-Shirt");
-        driver.findElement(By.id("shopping_cart_container")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Your Cart']")));
-        String name = driver.findElement(By.id("checkout")).getText();
-        assertEquals(name, "CHECKOUT");
-        driver.findElement(By.id("checkoutblabla")).click();
-    }
 
-    @Step("Добавление и удаление товара из корзины")
+    @Step("Adding 3 positions and after deleting 1")
     public void chooseThreeItemAndChangeOnTwo() {
         addToCart("Sauce Labs Backpack");
         addToCart("Sauce Labs Bike Light");
@@ -74,22 +59,26 @@ public class ProductsPage extends BasePage {
     }
 
 
-    @Step("Использование неверного локатора")
-    public void goTotheCart() {
-        driver.findElement(By.id("shopping_cart_containerBLABLA")).click();
+    @Step(" Sorting alphabetically / ascending and descending prices ")
+    public void sort() {
+        new Select(driver.findElement(By.cssSelector(".product_sort_container")));
+        //String fromAtoZ = driver.findElement(By.className("active_option")).getText();
+        //assertEquals(fromAtoZ, "NAME (A TO Z)");
+        driver.findElement(By.xpath("//*[@id='header_container']/div[2]/div[2]/span/select/option[3]")).click();
+        //String lowToHigh = driver.findElement(By.className("active_option")).getText();
+        //assertEquals(lowToHigh, "PRICE (LOW TO HIGH)");
+        driver.findElement(By.xpath("//*[@id='header_container']/div[2]/div[2]/span/select/option[4]")).click();
+        // String highToLow = driver.findElement(By.className("active_option")).getText();
+        //assertEquals(highToLow, "PRICE (HIGH TO LOW)");
+
     }
 
-    @Step("Проверка сортировки товара ")
-    public void sort() {
-        WebElement sortingElement = driver.findElement(sort);
-        Select select = new Select(driver.findElement(By.cssSelector(".product_sort_container")));
-        String fromAtoZ = driver.findElement(By.className("active_option")).getText();
-        assertEquals(fromAtoZ, "NAME (A TO Z)");
-        driver.findElement(By.xpath("//*[@id='header_container']/div[2]/div[2]/span/select/option[3]")).click();
-        String lowToHigh = driver.findElement(By.className("active_option")).getText();
-        assertEquals(lowToHigh, "PRICE (LOW TO HIGH)");
-        driver.findElement(By.xpath("//*[@id='header_container']/div[2]/div[2]/span/select/option[4]")).click();
-        String highToLow = driver.findElement(By.className("active_option")).getText();
-        assertEquals(highToLow, "PRICE (HIGH TO LOW)");
+    public void sorting(String sorting){
+        new Select(driver.findElement(sort)).selectByVisibleText(sorting);
     }
+
+
+
+
+
 }
