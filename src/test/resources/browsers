@@ -17,33 +17,33 @@
     <test name="Chrome">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="tests.CheckoutTest"/>
+            <class name="tests.CheckOutTest"/>
             <class name="tests.CartTest"/>
             <class name="tests.LoginTest"/>
-            <class name="tests.SortTest"/>
-            <class name="tests.UserInfoTest"/>
+            <class name="tests.SortingTest"/>
+            <class name="tests.InfoUserTest"/>
         </classes>
     </test>
 
     <test name="Opera">
         <parameter name="browser" value="opera"/>
         <classes>
-            <class name="tests.CheckoutTest"/>
+            <class name="tests.CheckOutTest"/>
             <class name="tests.CartTest"/>
             <class name="tests.LoginTest"/>
-            <class name="tests.SortTest"/>
-            <class name="tests.UserInfoTest"/>
+            <class name="tests.SortingTest"/>
+            <class name="tests.InfoUserTest"/>
         </classes>
     </test>
 
     <test name="EDGE">
         <parameter name="browser" value="EDGE"/>
         <classes>
-            <class name="tests.CheckoutTest"/>
+            <class name="tests.CheckOutTest"/>
             <class name="tests.CartTest"/>
             <class name="tests.LoginTest"/>
-            <class name="tests.SortTest"/>
-            <class name="tests.UserInfoTest"/>
+            <class name="tests.SortingTest"/>
+            <class name="tests.InfoUserTest"/>
 
 
         </classes>
@@ -52,11 +52,11 @@
     <test name="FireFox">
         <parameter name="browser" value="FireFox"/>
         <classes>
-            <class name="tests.CheckoutTest"/>
+            <class name="tests.CheckOutTest"/>
             <class name="tests.CartTest"/>
             <class name="tests.LoginTest"/>
-            <class name="tests.SortTest"/>
-            <class name="tests.UserInfoTest"/>
+            <class name="tests.SortingTest"/>
+            <class name="tests.InfoUserTest"/>
         </classes>
     </test>
 </suite>
