@@ -12,7 +12,7 @@
     </test>
     <test name="Checkout">
         <classes>
-            <class name="tests.CheckoutTest"/>
+            <class name="tests.CheckOutTest"/>
         </classes>
     </test>
     <test name="Login">
@@ -22,17 +22,15 @@
     </test>
     <test name="Sort">
         <classes>
-            <class name="tests.SortTest"/>
+            <class name="tests.SortingTest"/>
         </classes>
     </test>
     <test name="UserInfo">
         <classes>
-            <class name="tests.UserInfoTest"/>
+            <class name="tests.InfoUserTest"/>
         </classes>
     </test>
 
 
 </suite>
 
-
-</suite>
